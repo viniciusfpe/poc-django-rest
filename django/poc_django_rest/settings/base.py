@@ -1,6 +1,7 @@
 import os
 import sys
-DEBUG = False
+
+DEBUG = True
 
 ADMINS = (
     
@@ -110,9 +111,10 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    #    'rest_framework.authentication.SessionAuthentication',
+    #    'rest_framework.authentication.BasicAuthentication',
+    #    'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'poc_django_rest.authentication.auth.BasicAuthentication',
     ),
 }
 
@@ -152,10 +154,10 @@ SWAGGER_SETTINGS = {
     'doc_expansion': 'none',
 }
 
-ROOT_URLCONF = 'poc-django-rest.urls'
+ROOT_URLCONF = 'poc_django_rest.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'poc-django-rest.wsgi.application'
+WSGI_APPLICATION = 'poc_django_rest.wsgi.application'
 
 
 #APPS
@@ -195,7 +197,7 @@ LOGGING = {
             '()': 'django.utils.log.RequireDebugFalse'
         },
         'add_hostname': {
-            '()': 'poc-django-rest.logs.filters.AddHostName',
+            '()': 'poc_django_rest.logs.filters.AddHostName',
         }
     },
     'formatters': {

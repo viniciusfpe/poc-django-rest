@@ -9,7 +9,10 @@ from channel.models import Channel
 from channel.serializers import ChannelSerializer
 from django.conf import settings
 
+from poc_django_rest.authentication.auth import BasicAuthentication
+
 class ChannelList(APIView):
+
     """
     List all channels, or create a new channel.
     """
