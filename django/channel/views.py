@@ -10,7 +10,6 @@ from channel.serializers import ChannelSerializer
 from django.conf import settings
 
 class ChannelList(APIView):
-
     """
     List all channels, or create a new channel.
     """
@@ -23,7 +22,6 @@ class ChannelList(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-
         """
         ---
         response_serializer: ChannelSerializer
@@ -40,7 +38,7 @@ class ChannelList(APIView):
 
 class ChannelDetail(APIView):
     """
-    Retrieve, update or delete a snippet instance.
+    Retrieve, update or delete a channel instance.
     """
     def get_object(self, pk):
         try:

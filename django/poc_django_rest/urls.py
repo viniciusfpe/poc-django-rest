@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token
 
 from channel.views import ChannelList, ChannelDetail
 
@@ -23,8 +22,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^channel/$', ChannelList.as_view()),
     url(r'^channel/(?P<pk>[0-9]+)/$', ChannelDetail.as_view()),
-    url(r'^token/api-token-auth/', obtain_jwt_token),
-    url(r'^token/api-token-verify/', verify_jwt_token),
     url(r'^docs/', include('rest_framework_swagger.urls')),
 
 

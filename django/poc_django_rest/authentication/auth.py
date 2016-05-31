@@ -1,20 +1,40 @@
-from django.contrib.auth.models import User
-from rest_framework import authentication
-from rest_framework import exceptions
+import http.client
 from django.contrib.auth import authenticate
+from django.utils.six import BytesIO
+from rest_framework import exceptions
+from rest_framework import authentication
+from rest_framework.parsers import JSONParser
+from .serializers  import TokenSerializer
 
 class BasicAuthentication(authentication.BaseAuthentication):
-    
+
     def authenticate(self, request):
-
-        username = request.META.get('HTTP_USERNAME') # get the username request header
-        
-        if not username: # no username passed in request headers
-            return None # authentication did not succeed
-
+        authorization = request.META.get('HTTP_AUTHORIZATION')
         try:
-            user = User.objects.get(username=username) # get the user
-        except User.DoesNotExist:
-            raise exceptions.AuthenticationFailed('No such user') # raise exception if user does not exist 
+            token = self.get_token(authorization)            
+        except:
+            raise exceptions.AuthenticationFailed('No such user')
 
-        return (user, None) # authentication successful
+        return (token.user, None)
+
+    def get_token(self, token):
+        conn = http.client.HTTPConnection('192.168.50.245:8080')
+        conn.set_debuglevel(0)
+        conn.request(method='GET', url='/token?token='+token, headers={'Content-Type': 'application/json'})
+        try:
+            response = conn.getresponse()
+            response_status  = response.status
+            response_body = response.read()
+        except(Exception, e):
+            raise Exception('Connection Error: %s' % e)
+        finally:
+            conn.close()
+
+        if(response_status != http.client.UNAUTHORIZED):
+            stream = BytesIO(response_body)
+            data = JSONParser().parse(stream)   
+            print(data)     
+            serializer = TokenSerializer(data=data)
+            return serializer.create()
+        else:
+            raise Exception
