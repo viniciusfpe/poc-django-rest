@@ -1,5 +1,5 @@
-cookiecutter-django-project
-===========================
+Exemple project Rest Framework
+===============================
 
 This is a simple Django cookiecutter based on the skeleton I've been using for years. It eases TDD with Django :)
 
