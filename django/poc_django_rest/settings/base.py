@@ -174,7 +174,7 @@ THIRD_PARTY_APPS = [
 ]
 
 PROJECT_APPS = [
-    'channel',
+    'poc_django_rest.channel',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS

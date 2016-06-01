@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from channel.views import ChannelList, ChannelDetail
+from poc_django_rest.channel.views import ChannelList, ChannelDetail
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

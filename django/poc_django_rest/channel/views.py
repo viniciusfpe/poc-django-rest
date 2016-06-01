@@ -1,19 +1,18 @@
+# -*- coding: utf-8 -*-
 import logging
-
+from django.conf import settings
 from django.http import Http404
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from channel.models import Channel
-from channel.serializers import ChannelSerializer
-from django.conf import settings
+from poc_django_rest.channel.models import Channel
+from poc_django_rest.channel.serializers import ChannelSerializer
 
 class ChannelList(APIView):
     """
     List all channels, or create a new channel.
     """
-
     def get(self, request, format=None):
         """
         ---

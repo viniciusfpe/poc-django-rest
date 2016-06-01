@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class User():
     def __init__(self, id, username, password, first_name, last_name, email):
         self.id = id

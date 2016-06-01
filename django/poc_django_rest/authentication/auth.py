@@ -1,9 +1,12 @@
-import http.client
+# -*- coding: utf-8 -*-
+import http.client, urllib.parse
+from django.conf import settings
 from django.contrib.auth import authenticate
 from django.utils.six import BytesIO
 from rest_framework import authentication, exceptions
 from rest_framework.parsers import JSONParser
 from .serializers  import TokenSerializer
+
 
 class BasicAuthentication(authentication.BaseAuthentication):
 
@@ -18,8 +21,8 @@ class BasicAuthentication(authentication.BaseAuthentication):
 
     def get_token(self, token):
         try:
-            conn = http.client.HTTPConnection('192.168.50.245:8080')
-            conn.request(method='GET', url='/token/?token='+token, headers={'Content-Type': 'application/json'})
+            conn = http.client.HTTPConnection(settings.WITWICKY['HOST'])
+            conn.request(method=settings.WITWICKY['METHOD'], url=settings.WITWICKY['PATH'] + '?' + urllib.parse.urlencode({'token': token}), headers={'Content-Type': 'application/json'})
             response = conn.getresponse()
             response_status  = response.status
             response_body = response.read()

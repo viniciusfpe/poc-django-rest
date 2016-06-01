@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from rest_framework import serializers, exceptions
 from .models import User, Token
 
@@ -26,5 +27,3 @@ class TokenSerializer(serializers.Serializer):
             return Token(user=user, **self.validated_data)
         else:
             raise exceptions.AuthenticationFailed('Error in validate permissions')
-
-
