@@ -14,7 +14,7 @@ MANAGERS = ADMINS
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = []
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -111,9 +111,6 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-    #    'rest_framework.authentication.SessionAuthentication',
-    #    'rest_framework.authentication.BasicAuthentication',
-    #    'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'poc_django_rest.authentication.auth.BasicAuthentication',
     ),
 }
@@ -134,7 +131,7 @@ SWAGGER_SETTINGS = {
     'unauthenticated_user': 'django.contrib.auth.models.AnonymousUser',
     'permission_denied_handler': None,
     'resource_access_handler': None,
-    'token_type': 'JWT',
+    'token_type': '',
     #'base_path':'helloreverb.com/docs',
     'info': {
         'contact': 'apiteam@wordnik.com',
@@ -161,7 +158,6 @@ WSGI_APPLICATION = 'poc_django_rest.wsgi.application'
 
 
 #APPS
-
 DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

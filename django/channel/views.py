@@ -15,7 +15,10 @@ class ChannelList(APIView):
     """
 
     def get(self, request, format=None):
-
+        """
+        ---
+        response_serializer: ChannelSerializer
+        """
         channel = Channel.objects.all()
         serializer = ChannelSerializer(channel, many=True)
 
